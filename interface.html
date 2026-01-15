@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Scoring Interface</title>
+  </head>
+  <body>
+    <h1>Score Calculator</h1>
+
+    <label>Item ID: <input id="itemId" type="number" value="10" /></label>
+    <br /><br />
+    <label>Quantity: <input id="qty" type="number" value="3" /></label>
+    <br /><br />
+    <button onclick="getScore()">Get score</button>
+
+    <pre id="result"></pre>
+
+    <script>
+      async function getScore() {
+        const itemId = document.getElementById("itemId").value;
+        const q = document.getElementById("qty").value;
+
+        const url = `http://127.0.0.1:8000/score?item_id=${itemId}&q=${q}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        document.getElementById("result").textContent = JSON.stringify(data, null, 2);
+      }
+    </script>
+  </body>
+</html>
+
